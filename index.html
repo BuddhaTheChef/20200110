@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Time Of Day</title>
+  </head>
+  <body style="text-align: center;">
+    <h1>Time of Day</h1>
+    <h1 id="demo">HI</h1>
+    <h1 id="currtime"></h1>
+    <footer>
+      <em> &copy; 2019-<span id="copyright">-2020 </span> </em>
+    </footer>
+  </body>
+
+  <script>
+    var d = new Date();
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    document.getElementById("demo").innerHTML =
+      months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+
+    var currentTime = document.getElementById("currtime");
+    function zeropadder(n) {
+      return (parseInt(n, 10) < 10 ? "0" : "") + n;
+    }
+    function updateTime() {
+      var timeNow = new Date(),
+        hh = timeNow.getHours(),
+        mm = timeNow.getMinutes(),
+        ss = timeNow.getSeconds(),
+        formatAMPM = hh >= 12 ? "PM" : "AM";
+      hh = hh % 12 || 12;
+      currentTime.innerHTML = hh + "<span>:</span>" + zeropadder(mm) + "<span>:</span>" + zeropadder(ss) + " " + formatAMPM;
+      setTimeout(updateTime, 1000);
+    }
+    updateTime();
+  </script>
+</html>
