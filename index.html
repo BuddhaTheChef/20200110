@@ -4,31 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Time Of Day</title>    
-    <!-- <style>
-        .bg1 {
-        background-image: url('https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'); 
-        }
-        .bg2 {
-        background-image: url('https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'); 
-        }
-        .bg3 {
-        background-image: url('https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'); 
-        }
-        .bg4 {
-        background-image: url('https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80'); 
-        }
-        </style> -->
+    <title>Time of Day</title>   
   </head>
-  <body id="main" style="text-align: center; background: #26292c; color: whitesmoke;background-image: url('https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80');">
-    <h1>Today</h1>
+  <body id="main" style="text-align: center; background: #26292c; color: whitesmoke; ">
+    
+    <h1 id="upTime" style="text-shadow: 0px 2px 8px rgb(0, 0, 0); font-size: 33px"></h1>
     <div style="display: flex; width: 100%; height: 80vh; justify-content: center; align-items:center; flex-direction: column; font-size: 50px">
-      <h1 id="demo">HI</h1>
-      <h1 id="currtime"></h1>
+      <h1 id="demo" style="text-shadow: 0px 2px 8px rgb(0, 0, 0);">HI</h1>
+      <h1 id="currtime" style="text-shadow: 0px 2px 8px rgb(0, 0, 0);"></h1>
+      <div id="colorChange" style="width: 70%; height: 30px; margin: 0px auto 0px auto; border-radius: 50px;">
+      
+        </div>
     </div>
     <footer>
-      <em> &copy; 2019-<span id="copyright">-2020 </span> </em>
+      <em> &copy; 2019-<span id="copyright"> </span> </em>
     </footer>
+    <img id="jumbo" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: -1;"/> 
   </body>
 
   <script>
@@ -37,6 +28,8 @@
 
     document.getElementById("demo").innerHTML =
       months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+
+    document.getElementById("copyright").innerHTML = d.getFullYear();
 
     var currentTime = document.getElementById("currtime");
     function zeropadder(n) {
@@ -48,7 +41,7 @@
         mm = timeNow.getMinutes(),
         ss = timeNow.getSeconds(),
         formatAMPM = hh >= 12 ? "PM" : "AM";
-      hh = hh % 12 || 12;
+       hh = hh % 12 || 12;
       currentTime.innerHTML = hh + "<span>:</span>" + zeropadder(mm) + "<span>:</span>" + zeropadder(ss) + " " + formatAMPM;
       setTimeout(updateTime, 1000);
     }
@@ -56,26 +49,32 @@
 
 // Background switcher //
 
-// var curHours = new Date().getHours();
-// if ( curHours > 6 || curHours <9) {
-// if(document.body) {
-//   document.getElementById('main').className="bg1";
-// }
-// }
-// else if (curHours >=9 && curHours  < 20) {
-// if(document.body) {
-//   document.getElementById('main').className="bg2";
-// }
-// }
-// else if (curHours >20 && curHours  < 24) {
-// if(document.body) {
-//   document.getElementById('main').className="bg3";
-// }
-// }
-// else {
-// if (document.body) {
-//   document.getElementById('main').className="bg4";
-// }
-// }
+var curHours = new Date().getHours();
+if ( curHours >= 5 && curHours <= 11) {
+  document.getElementById('upTime').innerHTML = "Good Morning, AJ";
+  document.getElementById('jumbo').src = 'https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80';
+  document.getElementById("colorChange").style.backgroundColor = '#f878cd';
+}
+else if (curHours >= 12 && curHours  <= 17) {
+  document.getElementById("upTime").innerHTML = "Good Afternoon, AJ";
+  document.getElementById("jumbo").src = 'https://images.unsplash.com/photo-1506422748879-887454f9cdff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80';
+  document.getElementById("colorChange").style.backgroundColor = '#f8788d';
+
+}
+
+else if (curHours >= 18 && curHours  <= 22) {
+  document.getElementById('upTime').innerHTML = "Good Evening, AJ";
+  document.getElementById("jumbo").src = 'https://images.unsplash.com/photo-1484447089447-a742155835e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80';
+  document.getElementById("colorChange").style.backgroundColor = '#fa5b5b';
+
+}
+
+else if (curHours >= 23 || curHours  <= 4) {
+  document.getElementById('upTime').innerHTML = "Good Night, AJ";
+  document.getElementById("jumbo").src = 'https://images.unsplash.com/photo-1499886887649-ea679189e7b5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80';
+  document.getElementById("colorChange").style.backgroundColor = '#ff4040';
+  
+}
+
   </script>
 </html>
